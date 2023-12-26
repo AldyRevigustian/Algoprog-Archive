@@ -313,6 +313,10 @@ void displayData()
   {
     num = max;
   }
+  if (num < 0)
+  {
+    num *= -1;
+  }
 
   House house[num];
   readData(house, num);
@@ -323,7 +327,6 @@ void displayData()
     printf("%-28s%-15s%-15lld%-10d%-10d%-15d%-15s%-15s\n", house[i].location, house[i].city, house[i].price, house[i].rooms, house[i].bathroom, house[i].carpark, house[i].type, house[i].furnish);
   }
 
-  printf("\n");
   clearConsole();
 }
 
@@ -370,7 +373,6 @@ void searchData()
     printf("No matching data found.\n");
   }
 
-  printf("\n");
   clearConsole();
 }
 
@@ -385,7 +387,7 @@ void sortBy()
 
   printf("Choose column: ");
   scanf("%s", col);
-  printf("Sort ascending or descending? ");
+  printf("Sort ascending or descending? (asc or desc) ");
   scanf("%s", direct);
 
   printf("\n");
@@ -435,7 +437,6 @@ void sortBy()
     printf("No matching data found.\n");
   }
 
-  printf("\n");
   clearConsole();
 }
 
@@ -458,7 +459,7 @@ void exportData()
 
   for (int i = 0; i < max; i++)
   {
-    fprintf(file, "%s,%s,%d,%d,%d,%d,%s,%s\n",
+    fprintf(file, "%s,%s,%lld,%d,%d,%d,%s,%s\n",
             house[i].location, house[i].city,
             house[i].price, house[i].rooms, house[i].bathroom,
             house[i].carpark, house[i].type, house[i].furnish);
@@ -467,7 +468,6 @@ void exportData()
   fclose(file);
   printf("Data successfully written to file %s!\n", nama);
 
-  printf("\n");
   clearConsole();
 }
 
@@ -479,6 +479,7 @@ int main()
   {
     showMenu();
     scanf("%d", &choice);
+
     switch (choice)
     {
     case 1:
