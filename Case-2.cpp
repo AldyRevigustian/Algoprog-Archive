@@ -439,6 +439,38 @@ void sortBy()
   clearConsole();
 }
 
+void exportData()
+{
+  char nama[101];
+  printf("File name: ");
+  scanf("%s", nama);
+
+  int max = countAll();
+  int isError = 0;
+  char col[101];
+  char direct[101];
+  House house[max];
+  readData(house, max);
+
+  FILE *file = fopen(strcat(nama, ".csv"), "w");
+
+  fprintf(file, "Location,City,Price,Rooms,Bathroom,CarPark,Type,Furnish\n");
+
+  for (int i = 0; i < max; i++)
+  {
+    fprintf(file, "%s,%s,%d,%d,%d,%d,%s,%s\n",
+            house[i].location, house[i].city,
+            house[i].price, house[i].rooms, house[i].bathroom,
+            house[i].carpark, house[i].type, house[i].furnish);
+  }
+
+  fclose(file);
+  printf("Data successfully written to file %s!\n", nama);
+
+  printf("\n");
+  clearConsole();
+}
+
 int main()
 {
   int choice;
@@ -466,6 +498,7 @@ int main()
     }
     case 4:
     {
+      exportData();
       break;
     }
     case 5:
